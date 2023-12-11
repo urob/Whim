@@ -412,7 +412,9 @@ internal class WorkspaceManager : IInternalWorkspaceManager, IWorkspaceManager
 		Logger.Debug("Activating next workspace");
 
 		monitor ??= _context.MonitorManager.ActiveMonitor;
+		IMonitor nextMonitor = _context.MonitorManager.GetNextMonitor(monitor);
 		IWorkspace? currentWorkspace = GetWorkspaceForMonitor(monitor);
+		IWorkspace? otherWorkspace = GetWorkspaceForMonitor(nextMonitor);
 		if (currentWorkspace == null)
 		{
 			Logger.Debug($"No workspace found for monitor {monitor}");
@@ -421,6 +423,10 @@ internal class WorkspaceManager : IInternalWorkspaceManager, IWorkspaceManager
 
 		int idx = _workspaces.IndexOf(currentWorkspace);
 		int nextIdx = (idx + 1).Mod(_workspaces.Count);
+		if (nextIdx == _workspaces.IndexOf(otherWorkspace)
+		{
+			int nextIdx = (idx + 2).Mod(_workspaces.Count);
+		}
 
 		IWorkspace nextWorkspace = _workspaces[nextIdx];
 
