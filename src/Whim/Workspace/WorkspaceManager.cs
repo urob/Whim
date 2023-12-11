@@ -421,6 +421,14 @@ internal class WorkspaceManager : IInternalWorkspaceManager, IWorkspaceManager
 
 		int idx = _workspaces.IndexOf(currentWorkspace);
 		int nextIdx = (idx + 1).Mod(_workspaces.Count);
+		
+		IMonitor nextMonitor = _context.MonitorManager.GetNextMonitor(monitor);
+		IWorkspace? otherWorkspace = GetWorkspaceForMonitor(nextMonitor);
+		int otherIdx = _workspaces.IndexOf(otherWorkspace);
+		if (nextIdx == otherIdx)
+		{
+			int nextIdx = (idx + 2).Mod(_workspaces.Count);
+		}
 
 		IWorkspace nextWorkspace = _workspaces[nextIdx];
 
