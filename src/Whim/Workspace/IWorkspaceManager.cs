@@ -134,7 +134,7 @@ public interface IWorkspaceManager : IEnumerable<IWorkspace>, IDisposable
 	/// The monitor to activate the workspace in. If <see langword="null"/>, this will default to
 	/// the focused monitor.
 	/// </param>
-	void ActivateNext(IMonitor? monitor = null);
+	void ActivateNext(IMonitor? monitor = null, bool skipInactive = false);
 
 	/// <summary>
 	/// Retrieves the monitor for the active workspace.
