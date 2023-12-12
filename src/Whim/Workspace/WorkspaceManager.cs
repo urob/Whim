@@ -407,7 +407,7 @@ internal class WorkspaceManager : IInternalWorkspaceManager, IWorkspaceManager
 		Activate(prevWorkspace, monitor);
 	}
 
-	public void ActivateNext(IMonitor? monitor = null)
+	public void ActivateNext(IMonitor? monitor = null, bool skipActive = false)
 	{
 		Logger.Debug("Activating next workspace");
 
@@ -421,6 +421,29 @@ internal class WorkspaceManager : IInternalWorkspaceManager, IWorkspaceManager
 
 		int idx = _workspaces.IndexOf(currentWorkspace);
 		int nextIdx = (idx + 1).Mod(_workspaces.Count);
+
+		if (_workspaces.Count >= _context.MonitorManager.Length)
+		{
+			Logger.Debug($"No inactive workspace found");
+			return;
+		}
+		if (skipActive)
+		{
+			foreach (IMonitor m in _context.MonitorManager)
+			{
+				IWorkspace? w = GetWorkspaceForMonitor(m);
+				if (w == null)
+				{
+					Logger.Debug($"No workspace found for monitor {m}");
+					return;
+				}
+				int wIdx = _workspaces.IndexOf(w);
+				if (nextIdx == wIdx)
+				{
+					nextIdx = (nextIdx + 1).Mod(_workspaces.Count);
+				}
+			}
+		}
 
 		IWorkspace nextWorkspace = _workspaces[nextIdx];
 
