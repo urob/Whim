@@ -39,6 +39,7 @@
 	<Style x:Key="bar:root_panel" TargetType="RelativePanel">
 		<Setter Property="Margin" Value="0" />
 		<Setter Property="Padding" Value="0,2" />
+		<Setter Property="MinHeight" Value="0" />
 	</Style>
 
 	<!--  Sub panels  -->
