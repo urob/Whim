@@ -53,14 +53,14 @@ internal static class DefaultFilteredWindowsKomorebi
 		filterManager.AddProcessFileNameFilter("Photo.exe");
 
 		// AutoHotkey
-		filterManager.Add((window) => window.Title.StartsWith("Window Spy") || window.Title.EndsWith("Window Spy"));
+		filterManager.Add((window) => window.Title.StartsWith("Window Spy"));  // Uses `StartsWith` to also match `* for AHKv2`
 		filterManager.AddProcessFileNameFilter("AutoHotkeyUX.exe");
 
 		// Bloxstrap
 		filterManager.AddProcessFileNameFilter("Bloxstrap.exe");
 
 		// Calculator
-		filterManager.Add((window) => window.Title.StartsWith("Calculator") || window.Title.EndsWith("Calculator"));
+		filterManager.AddTitleFilter("Calculator");
 
 		// Citrix Receiver
 		filterManager.AddProcessFileNameFilter("SelfService.exe");
@@ -90,11 +90,14 @@ internal static class DefaultFilteredWindowsKomorebi
 		// GOG Galaxy
 		filterManager.Add((window) => window.WindowClass.StartsWith("Chrome_RenderWidgetHostHWND") || window.WindowClass.EndsWith("Chrome_RenderWidgetHostHWND"));  // Targets a hidden window spawned by GOG Galaxy
 
+		// GitHub Credential Manager
+		filterManager.AddProcessFileNameFilter("git-credential-manager.exe");
+
 		// Google Drive
 		filterManager.AddProcessFileNameFilter("GoogleDriveFS.exe");
 
 		// IntelliJ IDEA
-		filterManager.Add((window) => window.WindowClass.StartsWith("SunAwtDialog") || window.WindowClass.EndsWith("SunAwtDialog"));  // Targets JetBrains IDE popups and floating windows
+		filterManager.AddWindowClassFilter("SunAwtDialog");  // Targets JetBrains IDE popups and floating windows
 
 		// Keyviz
 		filterManager.AddProcessFileNameFilter("keyviz.exe");
@@ -156,7 +159,7 @@ internal static class DefaultFilteredWindowsKomorebi
 		filterManager.AddProcessFileNameFilter("ProcessHacker.exe");
 
 		// PyCharm
-		// filterManager.Add((window) => window.WindowClass.StartsWith("SunAwtDialog") || window.WindowClass.EndsWith("SunAwtDialog"));  // duplicate rule
+		// filterManager.AddWindowClassFilter("SunAwtDialog");  // duplicate rule
 
 		// QQ
 		filterManager.Add((window) => window.Title.StartsWith("图片查看器") || window.Title.EndsWith("图片查看器"));
@@ -170,14 +173,14 @@ internal static class DefaultFilteredWindowsKomorebi
 		filterManager.AddProcessFileNameFilter("RepoZ.exe");
 
 		// Rider
-		// filterManager.Add((window) => window.WindowClass.StartsWith("SunAwtDialog") || window.WindowClass.EndsWith("SunAwtDialog"));  // duplicate rule
+		// filterManager.AddWindowClassFilter("SunAwtDialog");  // duplicate rule
 		filterManager.Add((window) => window.Title.StartsWith("PopupMessageWindow") || window.Title.EndsWith("PopupMessageWindow"));  // Targets JetBrains IDE popups
 
 		// RoundedTB
 		filterManager.AddProcessFileNameFilter("RoundedTB.exe");
 
 		// RustRover
-		// filterManager.Add((window) => window.WindowClass.StartsWith("SunAwtDialog") || window.WindowClass.EndsWith("SunAwtDialog"));  // duplicate rule
+		// filterManager.AddWindowClassFilter("SunAwtDialog");  // duplicate rule
 
 		// Sideloadly
 		filterManager.AddProcessFileNameFilter("sideloadly.exe");
