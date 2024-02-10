@@ -59,6 +59,9 @@ internal static class DefaultFilteredWindowsKomorebi
 		// Bloxstrap
 		filterManager.AddProcessFileNameFilter("Bloxstrap.exe");
 
+		// CLion
+		filterManager.AddWindowClassFilter("SunAwtDialog");  // Targets JetBrains IDE popups and floating windows
+
 		// Calculator
 		filterManager.AddTitleFilter("Calculator");
 
@@ -97,7 +100,7 @@ internal static class DefaultFilteredWindowsKomorebi
 		filterManager.AddProcessFileNameFilter("GoogleDriveFS.exe");
 
 		// IntelliJ IDEA
-		filterManager.AddWindowClassFilter("SunAwtDialog");  // Targets JetBrains IDE popups and floating windows
+		// filterManager.AddWindowClassFilter("SunAwtDialog");  // duplicate rule
 
 		// Keyviz
 		filterManager.AddProcessFileNameFilter("keyviz.exe");
@@ -211,11 +214,17 @@ internal static class DefaultFilteredWindowsKomorebi
 		// Task Manager
 		filterManager.Add((window) => window.WindowClass.StartsWith("TaskManagerWindow") || window.WindowClass.EndsWith("TaskManagerWindow"));
 
+		// Total Commander
+		filterManager.AddWindowClassFilter("TDLG2FILEACTIONMIN");  // Target standard copy window
+
 		// TouchCursor
 		filterManager.AddProcessFileNameFilter("tcconfig.exe");
 
 		// TranslucentTB
 		filterManager.AddProcessFileNameFilter("TranslucentTB.exe");
+
+		// WebStorm
+		// filterManager.AddWindowClassFilter("SunAwtDialog");  // duplicate rule
 
 		// WinZip (32-bit)
 		filterManager.AddProcessFileNameFilter("winzip32.exe");
